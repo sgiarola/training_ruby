@@ -7,15 +7,9 @@ class Book
 		@preco = preco
 	end
 
+	attr_accessor :preco
+
 	def to_s
-		"Autor: #{@autor}, Isbn: #{@isbn}, Páginas: #{@numero_de_paginas}"
-	end
-
-	def preco
-		@preco
-	end
-
-	def preco=(preco)
-		@preco = preco
+		"Autor: #{@autor}, Isbn: #{@isbn}, Páginas: #{@numero_de_paginas}, Preço: #{@preco}"
 	end
 end
