@@ -15,7 +15,7 @@ class Library
 
 	def books_by_category(category)
 		@books[category].each do |book|
-			yield book
+			yield book if block_given?
 		end
 	end
 end
