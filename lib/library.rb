@@ -12,4 +12,10 @@ class Library
 		@books[book.category] ||= []
 		@books[book.category] << book
 	end
+
+	def books_by_category(category)
+		@books[category].each do |book|
+			yield book
+		end
+	end
 end

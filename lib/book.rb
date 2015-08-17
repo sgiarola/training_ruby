@@ -1,19 +1,20 @@
 class Book
 
-	def initialize(autor, isbn="1", numero_de_paginas, preco, category)
-		@autor = autor
+	def initialize(actor, isbn="1", number_of_pages, price, category)
+		@actor = actor
 		@isbn = isbn
-		@numero_de_paginas = numero_de_paginas
-		@preco = preco
+		@number_of_pages = number_of_pages
+		@price = price
 		@category = category
 	end
 
-	attr_accessor :preco
+	attr_accessor :price
 	attr_reader :category
 	attr_reader :isbn
+	attr_reader :actor
 
 	def to_s
-		"Autor: #{@autor}, Isbn: #{@isbn}, Páginas: #{@numero_de_paginas}, Preço: #{@preco}, Categoria: #{@category}"
+		"Actor: #{@actor}, Isbn: #{@isbn}, Pages: #{@number_of_pages}, Price: #{@price}, Category: #{@category}"
 	end
 
 	def eql?(other_book)
