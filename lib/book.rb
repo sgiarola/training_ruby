@@ -1,6 +1,7 @@
 class Book
 
-	def initialize(actor, isbn="1", number_of_pages, price, category)
+	def initialize(actor, isbn="1", number_of_pages, price, category, title)
+		@title = title
 		@actor = actor
 		@isbn = isbn
 		@number_of_pages = number_of_pages
@@ -9,9 +10,7 @@ class Book
 	end
 
 	attr_accessor :price
-	attr_reader :category
-	attr_reader :isbn
-	attr_reader :actor
+	attr_reader :category, :title, :isbn, :actor
 
 	def to_s
 		"Actor: #{@actor}, Isbn: #{@isbn}, Pages: #{@number_of_pages}, Price: #{@price}, Category: #{@category}"
