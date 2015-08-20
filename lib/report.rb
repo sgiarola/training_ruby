@@ -12,9 +12,10 @@ class Report
     @library.books.map &:title
   end
 
-  def fine_of_ten_percent(book_price)
+  # Using lambda and curryng only for study
+  def fine_of_rented_books
     fine_percent = lambda { |percent, price| percent * price }.curry
     fine_ten_percent = fine_percent.call 0.1
-    fine_ten_percent.call book_price
+    @library.renteds.map { |book| fine_ten_percent.call book.price }
   end
 end

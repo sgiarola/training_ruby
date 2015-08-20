@@ -2,10 +2,17 @@ class Library
 
 	def initialize
 		@books = {}
+		@renteds = []
 	end
+
+	attr_accessor :renteds
 
 	def books
 		@books.values.flatten
+	end
+
+	def rent_book(book)
+		@renteds << book
 	end
 
 	def add_book(book)
