@@ -3,6 +3,7 @@ class Library
 	def initialize
 		@books = {}
 		@renteds = []
+		@database_file = DatabaseFile.new
 	end
 
 	attr_accessor :renteds
@@ -16,13 +17,20 @@ class Library
 	end
 
 	def add_book(book)
-		@books[book.category] ||= []
-		@books[book.category] << book
+		save book do
+			@books[book.category] ||= []
+			@books[book.category] << book
+		end
 	end
 
 	def books_by_category(category)
 		@books[category].each do |book|
 			yield book if block_given?
 		end
+	end
+
+	def save(book)
+		@database_file.save book
+		yield
 	end
 end

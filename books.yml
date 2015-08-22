@@ -1,0 +1,8 @@
+--- !ruby/object:Book
+title: Título 2
+actor: Samuel
+isbn: '1'
+number_of_pages: 169
+price: 69
+category: :testes
+
