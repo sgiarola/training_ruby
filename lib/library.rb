@@ -29,6 +29,8 @@ class Library
 		end
 	end
 
+	private
+
 	def save(book)
 		@database_file.save book
 		yield
