@@ -9,7 +9,7 @@ class Library
 	attr_accessor :renteds
 
 	def books
-		@books.values.flatten
+		@books ||= @database_file.load
 	end
 
 	def rent(book)
