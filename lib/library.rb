@@ -1,7 +1,7 @@
 class Library
 
 	def initialize
-		@books = {}
+		@books = []
 		@renteds = []
 		@database_file = DatabaseFile.new
 	end
@@ -12,21 +12,18 @@ class Library
 		@books.values.flatten
 	end
 
-	def rent_book(book)
+	def rent(book)
 		@renteds << book
 	end
 
-	def add_book(book)
+	def add(book)
 		save book do
-			@books[book.category] ||= []
-			@books[book.category] << book
+			@books << book
 		end
 	end
 
 	def books_by_category(category)
-		@books[category].each do |book|
-			yield book if block_given?
-		end
+		@books.select { |book| book.category == category }
 	end
 
 	private
