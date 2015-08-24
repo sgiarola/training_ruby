@@ -1,4 +1,4 @@
-class Book
+class Book < Midia
 
 	def initialize(actor, isbn="1", number_of_pages, price, category, title)
 		@title = title
