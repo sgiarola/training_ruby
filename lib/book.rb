@@ -9,8 +9,7 @@ class Book < Midia
 		@category = category
 	end
 
-	attr_accessor :price
-	attr_reader :category, :title, :isbn, :actor
+	attr_reader :category, :isbn, :actor
 
 	def to_s
 		"Actor: #{@actor}, Isbn: #{@isbn}, Pages: #{@number_of_pages}, Price: #{@price}, Category: #{@category}"

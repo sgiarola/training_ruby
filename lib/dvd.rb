@@ -1,15 +1,12 @@
 class Dvd < Midia
 
-  attr_accessor :value
-  attr_reader :title
-
-  def initialize(title, value, category)
+  def initialize(title, price, category)
     @title = title
-    @value = value
+    @price = price
     @category = category
   end
 
   def to_s
-    %Q{ Título: #{@title}, Valor: #{@value} }
+    %Q{ Título: #{@title}, Preço: #{@price}, Category: #{@category} }
   end
 end
