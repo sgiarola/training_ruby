@@ -1,6 +1,7 @@
 class Dvd < Midia
 
   def initialize(title, price, category)
+    super()
     @title = title
     @price = price
     @category = category

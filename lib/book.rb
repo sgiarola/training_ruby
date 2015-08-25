@@ -7,6 +7,7 @@ class Book < Midia
 		@number_of_pages = number_of_pages
 		@price = price
 		@category = category
+		@discount = 0.15
 	end
 
 	attr_reader :category, :isbn, :actor
