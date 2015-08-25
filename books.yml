@@ -6,3 +6,12 @@ number_of_pages: 169
 price: 69
 category: :testes
 
+--- !ruby/object:Book
+title: Title
+actor: Samuel
+isbn: '1'
+number_of_pages: 169
+price: 96
+category: :testes
+discount: 0.15
+
