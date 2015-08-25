@@ -2,6 +2,7 @@ class Webstore
 
 	require File.expand_path("lib/book")
 	require File.expand_path("lib/dvd")
+	require File.expand_path("lib/cd")
 	require File.expand_path("lib/midia")
 	require File.expand_path("lib/library")
 	require File.expand_path("lib/report")
