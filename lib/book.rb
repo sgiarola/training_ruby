@@ -1,5 +1,7 @@
 class Book < Midia
 
+	include MoneyFormat
+
 	def initialize(actor, isbn="1", number_of_pages, price, category, title)
 		@title = title
 		@actor = actor

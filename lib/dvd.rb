@@ -1,5 +1,7 @@
 class Dvd < Midia
 
+  include MoneyFormat
+
   def initialize(title, price, category)
     super()
     @title = title

@@ -1,5 +1,6 @@
 class Webstore
 
+	require File.expand_path("lib/money_format")
 	require File.expand_path("lib/midia")
 	require File.expand_path("lib/book")
 	require File.expand_path("lib/dvd")
