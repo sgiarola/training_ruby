@@ -1,5 +1,7 @@
 module EasyPurchase
-	class Set
+	class Library
+
+		prepend Enumerable
 
 		def initialize
 			@renteds = []
@@ -23,7 +25,11 @@ module EasyPurchase
 		end
 
 		def books_by_category(category)
-			books.select { |book| book.category == category }
+			book.select { |book| book.category == category }
+		end
+
+		def each
+			books.each { |book| yield book }
 		end
 
 		private
