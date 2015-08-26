@@ -1,6 +1,6 @@
 class Dvd < Midia
 
-  include MoneyFormat
+  prepend MoneyFormat
 
   def initialize(title, price, category)
     super()

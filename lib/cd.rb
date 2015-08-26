@@ -1,6 +1,6 @@
 class Cd < Midia
 
-  include MoneyFormat
+  prepend MoneyFormat
 
   def initialize(title, price, category)
     @title = title,
