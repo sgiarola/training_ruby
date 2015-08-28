@@ -10,32 +10,34 @@ module EasyPurchase
 
 		attr_accessor :renteds
 
-		def books
-			@books ||= @database_file.load
+		def midias
+			@midias ||= @database_file.load
 		end
 
-		def rent(book)
-			@renteds << book
+		def rent(midia)
+			@renteds << midia
 		end
 
-		def add(book)
-			save book do
-				books << book
+		def add(midia)
+			save midia do
+				midias << midia
 			end
 		end
 
-		def books_by_category(category)
-			book.select { |book| book.category == category }
+		def midias_by_category(category)
+			midias.select do |midia|
+				midia.category == category if midia.respond_to? :category
+			end
 		end
 
 		def each
-			books.each { |book| yield book }
+			midias.each { |midia| yield midia }
 		end
 
 		private
 
-		def save(book)
-			@database_file.save book
+		def save(midia)
+			@database_file.save midia
 			yield
 		end
 	end
