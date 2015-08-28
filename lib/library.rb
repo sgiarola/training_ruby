@@ -4,7 +4,7 @@ module EasyPurchase
 		prepend Enumerable
 
 		def initialize
-			@renteds = []
+			@renteds = ::Array.new
 			@database_file = DatabaseFile.new
 		end
 
