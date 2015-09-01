@@ -1,13 +1,21 @@
 class Magazine
+
+  @id = 0
+
+  def self.id
+    @id += 1
+  end
+
   def initialize(title)
+    @id = self.class.id
     @title = title
   end
 
-  def title
-    @title
+  def id
+    @id
   end
 
-  def formated_title
-    "Título: #{@title}."
+  def title
+    "Título: #{@titulo.upcase}"
   end
 end
