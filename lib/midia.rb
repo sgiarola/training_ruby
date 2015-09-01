@@ -1,6 +1,6 @@
 class Midia
 
-  attr_accessor :value
+  attr_accessor :price
   attr_reader :title
 
   def initialize
