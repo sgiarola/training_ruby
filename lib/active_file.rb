@@ -1,4 +1,5 @@
-require "FileUtils"
+require "fileutils"
+require "yaml"
 
 module ActiveFile
 
@@ -18,24 +19,50 @@ module ActiveFile
 
   module ClassMethods
     def find(id)
-      raise DocumentNotFound,
-        "Arquivo db/magazines/#{id} não encontrado", caller
-        unless File.exists?("db/magazines/#{id}.yml")
-      YAML.load File.open("db/magazines/#{@id}.yml", "r")
+      raise DocumentNotFound, "Arquivo db/magazines/#{id} não encontrado", caller unless File.exists?("db/magazines/#{id}.yml")
+      YAML.load File.open("db/magazines/#{id}.yml", "r")
     end
 
     def next_id
       Dir.glob("db/magazines/*.yml").size + 1
     end
+
+    def field(name)
+      @fields ||= []
+      @fields << name
+
+      get = %Q{
+        def #{name}
+          @#{name}
+        end
+      }
+
+      set = %Q{
+        def #{name}=(price)
+          @#{name}=price
+        end
+      }
+
+      self.class_eval get
+      self.class_eval set
+    end
   end
 
   def self.included(base)
     base.extend ClassMethods
+    base.class_eval do
+      attr_reader :id, :destroyed, :new_record
+      def initialize
+        @id = self.class.next_id
+        @destroyed = false
+        @new_record = true
+      end
+    end
   end
 
   private
 
-  def.serialize
+  def serialize
     YAML.dump self
   end
 end

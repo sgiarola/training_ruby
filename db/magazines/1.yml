@@ -1,0 +1,6 @@
+--- !ruby/object:Magazine
+id: 1
+destroyed: false
+new_record: false
+title: asc
+price: 123
