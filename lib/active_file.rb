@@ -17,7 +17,18 @@ module ActiveFile
     end
   end
 
+  class Field
+    attr_reader :name, :required
+
+    def initialize(name, required)
+      @name, @required = name, required
+    end
+  end
+
   module ClassMethods
+
+    attr_reader :fields
+
     def find(id)
       raise DocumentNotFound, "Arquivo db/magazines/#{id} não encontrado", caller unless File.exists?("db/magazines/#{id}.yml")
       YAML.load File.open("db/magazines/#{id}.yml", "r")
@@ -27,24 +38,9 @@ module ActiveFile
       Dir.glob("db/magazines/*.yml").size + 1
     end
 
-    def field(name)
+    def field(name, required: false)
       @fields ||= []
-      @fields << name
-
-      get = %Q{
-        def #{name}
-          @#{name}
-        end
-      }
-
-      set = %Q{
-        def #{name}=(price)
-          @#{name}=price
-        end
-      }
-
-      self.class_eval get
-      self.class_eval set
+      @fields << Field.new(name, required)
     end
   end
 
@@ -57,8 +53,13 @@ module ActiveFile
         @destroyed = false
         @new_record = true
 
-        parameters.each do |key, value|
-          instance_variable_set "@#{key}", value
+        self.class.fields.each do |field|
+          parameter = parameters.select  { |k, v| k == field.name }
+          if field.required
+            raise StandardError.new("#{field.name} obrigatório") \ unless parameter && parameter[field.name]
+          else
+            instance_variable_set "@#{field.name}", parameter[field.name]
+          end
         end
       end
     end

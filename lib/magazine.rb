@@ -1,6 +1,6 @@
 class Magazine
 
   include ActiveFile
-  field :title
+  field :title, required: true
   field :price
 end
