@@ -23,6 +23,10 @@ module ActiveFile
     def initialize(name, required)
       @name, @required = name, required
     end
+
+    def to_assign
+      "@#{@name} = #{@name}"
+    end
   end
 
   module ClassMethods
@@ -41,28 +45,21 @@ module ActiveFile
     def field(name, required: false)
       @fields ||= []
       @fields << Field.new(name, required)
+
+      base.class_eval %Q$
+        attr_reader :id, :destroyed, :new_record
+        def initialize(#{@fields.map(&:name).join(":, ")})
+          @id = self.class.next_id
+          @destroyed = false
+          @new_record = true
+          #{@fields.map(&:to_assign).join("\n")}
+        end
+      $
     end
   end
 
   def self.included(base)
     base.extend ClassMethods
-    base.class_eval do
-      attr_reader :id, :destroyed, :new_record
-      def initialize(parameters = {})
-        @id = self.class.next_id
-        @destroyed = false
-        @new_record = true
-
-        self.class.fields.each do |field|
-          parameter = parameters.select  { |k, v| k == field.name }
-          if field.required
-            raise StandardError.new("#{field.name} obrigatório") \ unless parameter && parameter[field.name]
-          else
-            instance_variable_set "@#{field.name}", parameter[field.name]
-          end
-        end
-      end
-    end
   end
 
   private
