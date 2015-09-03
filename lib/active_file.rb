@@ -18,10 +18,14 @@ module ActiveFile
   end
 
   class Field
-    attr_reader :name, :required
+    attr_reader :name, :required, :default
 
-    def initialize(name, required)
-      @name, @required = name, required
+    def initialize(name, required, default)
+      @name, @required, @default = name, required, default
+    end
+
+    def to_argument
+      "#{@name}: #{@default}"
     end
 
     def to_assign
@@ -42,13 +46,13 @@ module ActiveFile
       Dir.glob("db/magazines/*.yml").size + 1
     end
 
-    def field(name, required: false)
+    def field(name, required: false, default: "")
       @fields ||= []
-      @fields << Field.new(name, required)
+      @fields << Field.new(name, required, default)
 
       base.class_eval %Q$
         attr_reader :id, :destroyed, :new_record
-        def initialize(#{@fields.map(&:name).join(":, ")})
+        def initialize(#{@fields.map(&:to_argument).join(":, ")})
           @id = self.class.next_id
           @destroyed = false
           @new_record = true
