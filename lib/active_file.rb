@@ -62,15 +62,24 @@ module ActiveFile
     end
 
     def method_missing(name, *args, &block)
+      argument = args.first
       field = name.to_s.split("_").last
-      super if @fields.map(&:name).include? field
+      super if @fields.include? field
 
       load_all.select do |object|
-        object.send(field) == args.first
+        should_select? object, field, argument
       end
     end
 
     private
+
+    def should_select?(object, field, argument)
+      if argument.kind_of? Regexp
+        object.send(field) =~ argument
+      else
+        object.send(field) == argument
+      end
+    end
 
     def load_all
       Dir.glob('db/magazines/*.yml').map do |file|
