@@ -1,3 +1,6 @@
+require 'rubygems'
+require 'brnumeros'
+
 module MoneyFormat
 
   def instance_method
@@ -13,6 +16,14 @@ module MoneyFormat
                   instance_variable_get("@#{name}")
           "R$ #{value}"
         end
+
+        define_method('#{name}_in_full') do
+          value = respond_to?(name) ?
+                  send(name) :
+                  instance_variable_get("@#{name}")
+            value.por_extenso_em_reais
+        end
+
       end
     end
   end
