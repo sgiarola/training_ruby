@@ -62,6 +62,7 @@ module ActiveFile
     end
 
     def method_missing(name, *args, &block)
+      super unless name.to_s =~ /^find_by_/
       argument = args.first
       field = name.to_s.split("_").last
       super if @fields.include? field
