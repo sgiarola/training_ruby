@@ -1,6 +1,8 @@
+require 'bundler/setup'
+require 'active_file'
+
 class Magazine
 
-  include ActiveFile
   field :title, required: true
   field :price
 end
