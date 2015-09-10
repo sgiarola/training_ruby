@@ -3,6 +3,7 @@ GEM
   specs:
     active_file (0.0.1)
     brnumeros (3.3.0)
+    rake (10.4.2)
 
 PLATFORMS
   ruby
@@ -10,6 +11,7 @@ PLATFORMS
 DEPENDENCIES
   active_file (= 0.0.1)
   brnumeros (= 3.3.0)
+  rake
 
 BUNDLED WITH
    1.10.6
